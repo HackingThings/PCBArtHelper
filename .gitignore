@@ -1,0 +1,10 @@
+
+obj/Debug/PCBArtHelper.csprojAssemblyReference.cache
+obj/Debug/.NETFramework,Version=v4.7.2.AssemblyAttributes.cs
+*.exe
+*.cache
+*.pdb
+*.resources
+*.config
+*.txt
+.vs/PCBArtHelper/v16/.suo
