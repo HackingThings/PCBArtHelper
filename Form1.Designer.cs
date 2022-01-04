@@ -35,6 +35,12 @@ namespace ImageEditor
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAllLayersSeperatlyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.quiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.imageQuantizationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.imageTracingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.cbAll = new System.Windows.Forms.CheckBox();
             this.btnRevert = new System.Windows.Forms.Button();
@@ -57,7 +63,9 @@ namespace ImageEditor
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
+            this.fileToolStripMenuItem,
+            this.helpToolStripMenuItem,
+            this.testToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1165, 24);
@@ -69,7 +77,8 @@ namespace ImageEditor
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openToolStripMenuItem,
             this.saveToolStripMenuItem,
-            this.saveAllLayersSeperatlyToolStripMenuItem});
+            this.saveAllLayersSeperatlyToolStripMenuItem,
+            this.quiteToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
@@ -77,23 +86,67 @@ namespace ImageEditor
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(285, 22);
             this.openToolStripMenuItem.Text = "Open...";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(285, 22);
             this.saveToolStripMenuItem.Text = "Save...";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveAllLayersSeperatlyToolStripMenuItem
             // 
             this.saveAllLayersSeperatlyToolStripMenuItem.Name = "saveAllLayersSeperatlyToolStripMenuItem";
-            this.saveAllLayersSeperatlyToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
-            this.saveAllLayersSeperatlyToolStripMenuItem.Text = "Save all layers seperatly";
+            this.saveAllLayersSeperatlyToolStripMenuItem.Size = new System.Drawing.Size(285, 22);
+            this.saveAllLayersSeperatlyToolStripMenuItem.Text = "Save all layers separately (painted white)";
             this.saveAllLayersSeperatlyToolStripMenuItem.Click += new System.EventHandler(this.saveAllLayersSeperatlyToolStripMenuItem_Click);
+            // 
+            // quiteToolStripMenuItem
+            // 
+            this.quiteToolStripMenuItem.Name = "quiteToolStripMenuItem";
+            this.quiteToolStripMenuItem.Size = new System.Drawing.Size(285, 22);
+            this.quiteToolStripMenuItem.Text = "Quit";
+            this.quiteToolStripMenuItem.Click += new System.EventHandler(this.quiteToolStripMenuItem_Click);
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // testToolStripMenuItem
+            // 
+            this.testToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.imageQuantizationToolStripMenuItem,
+            this.imageTracingToolStripMenuItem});
+            this.testToolStripMenuItem.Name = "testToolStripMenuItem";
+            this.testToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
+            this.testToolStripMenuItem.Text = "TBD";
+            // 
+            // imageQuantizationToolStripMenuItem
+            // 
+            this.imageQuantizationToolStripMenuItem.Name = "imageQuantizationToolStripMenuItem";
+            this.imageQuantizationToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.imageQuantizationToolStripMenuItem.Text = "Image Quantization";
+            this.imageQuantizationToolStripMenuItem.Click += new System.EventHandler(this.imageQuantizationToolStripMenuItem_Click);
+            // 
+            // imageTracingToolStripMenuItem
+            // 
+            this.imageTracingToolStripMenuItem.Name = "imageTracingToolStripMenuItem";
+            this.imageTracingToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.imageTracingToolStripMenuItem.Text = "Image Tracing";
             // 
             // pictureBox1
             // 
@@ -108,8 +161,6 @@ namespace ImageEditor
             // cbAll
             // 
             this.cbAll.AutoSize = true;
-            this.cbAll.Checked = true;
-            this.cbAll.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbAll.Location = new System.Drawing.Point(74, 27);
             this.cbAll.Name = "cbAll";
             this.cbAll.Size = new System.Drawing.Size(117, 17);
@@ -242,7 +293,7 @@ namespace ImageEditor
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "PCB Art Helper Utility";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -275,6 +326,12 @@ namespace ImageEditor
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ToolStripMenuItem quiteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem testToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem imageQuantizationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem imageTracingToolStripMenuItem;
     }
 }
 

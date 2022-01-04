@@ -21,13 +21,13 @@ namespace ImageEditor
         public SaveFileDialog sf = new SaveFileDialog();
         public FolderBrowserDialog fbd = new FolderBrowserDialog();
         public Bitmap newBmp = new Bitmap(1, 1);
-        Bitmap bmp = new Bitmap(1,1);
+        public bool aboutOpen = false;
+        Bitmap bmp = new Bitmap(1, 1);
         Bitmap Originalbmp = new Bitmap(1, 1);
         public Form1()
         {
             InitializeComponent();
-            opf.Filter = "Image Files(*.BMP; *.JPG; *.GIF)| *.BMP; *.JPG; *.GIF | All files(*.*) | *.*";
-            
+            opf.Filter = "Bitmap Image Files(*.BMP)| *.BMP; | All files(*.*) | *.*;";
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -44,22 +44,17 @@ namespace ImageEditor
                 MessageBox.Show("Error: Image file has no defined Pallete!");
                 return;
             }
-            Originalbmp = new Bitmap(opf.FileName); 
+            Originalbmp = new Bitmap(opf.FileName);
             pictureBox1.Image = bmp;
             pbOriginal.Image = bmp;
             newBmp = new Bitmap(bmp);
-            
 
             for (int i = 0; i < bmp.Palette.Entries.Length; i++)
             {
                 checkedListBox1.Items.Add(bmp.Palette.Entries[i], false);
                 listView1.Items.Add("   ");
                 listView1.Items[i].BackColor = bmp.Palette.Entries[i];
-                
             }
-            
-
-            
         }
 
         private void btnWhite_Click(object sender, EventArgs e)
@@ -73,13 +68,13 @@ namespace ImageEditor
                     switchColorInImage((Color)checkedListBox1.Items[i], Color.White);
                 }
                 else
-                { 
+                {
                     switchColorInImage((Color)checkedListBox1.Items[i], Color.Black);
                 }
             }
         }
 
-       
+
 
         private void btnBlack_Click(object sender, EventArgs e)
         {
@@ -146,7 +141,13 @@ namespace ImageEditor
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            sf.FileOk += Sf_FileOk;
             sf.ShowDialog();
+
+        }
+
+        private void Sf_FileOk(object sender, CancelEventArgs e)
+        {
             newBmp.Save(sf.FileName, ImageFormat.Bmp);
         }
 
@@ -163,12 +164,11 @@ namespace ImageEditor
 
                 for (int k = 0; k < checkedListBox1.Items.Count; k++)
                 {
-                    if (i!=k)
+                    if (i != k)
                     {
                         checkedListBox1.SetItemChecked(k, false);
                     }
                     else { checkedListBox1.SetItemChecked(k, true); }
-
                 }
                 for (int j = 0; j < checkedListBox1.Items.Count; j++)
                 {
@@ -180,12 +180,38 @@ namespace ImageEditor
                     {
                         switchColorInImage((Color)checkedListBox1.Items[j], Color.Black);
                     }
-                    
                 }
                 newBmp.Save(fbd.SelectedPath + "\\out_white_" + i + ".bmp");
             }
-          
-      
         }
+
+        private void quiteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!aboutOpen)
+            {
+                PCBArtHelper.About a = new PCBArtHelper.About();
+                a.Show(this);
+                aboutOpen = true;
+                a.FormClosed += A_FormClosed;
+            }
+
+        }
+
+        private void A_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            aboutOpen = false;
+        }
+
+        private void imageQuantizationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
     }
 }
