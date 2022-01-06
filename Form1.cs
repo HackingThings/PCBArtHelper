@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 namespace ImageEditor
 {
-
+    
     public partial class Form1 : Form
     {
 
@@ -22,6 +22,7 @@ namespace ImageEditor
         public FolderBrowserDialog fbd = new FolderBrowserDialog();
         public Bitmap newBmp = new Bitmap(1, 1);
         public bool aboutOpen = false;
+        public bool ImageQuantizaionOpen = false;
         Bitmap bmp = new Bitmap(1, 1);
         Bitmap Originalbmp = new Bitmap(1, 1);
         public Form1()
@@ -38,10 +39,16 @@ namespace ImageEditor
 
         private void Opf_FileOk(object sender, CancelEventArgs e)
         {
+            checkedListBox1.Items.Clear();
             bmp = new Bitmap(opf.FileName);
             if (bmp.Palette.Entries.Length == 0)
             {
                 MessageBox.Show("Error: Image file has no defined Pallete!");
+                return;
+            }
+            else if (bmp.Palette.Entries.Length > 16)
+            {
+                MessageBox.Show("Error: Image file has more than 16 colors in Pallete!");
                 return;
             }
             Originalbmp = new Bitmap(opf.FileName);
@@ -209,9 +216,21 @@ namespace ImageEditor
 
         private void imageQuantizationToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!ImageQuantizaionOpen)
+            {
+                PCBArtHelper.ImageQuantization ImageQuantizaionForm = new PCBArtHelper.ImageQuantization();
+                ImageQuantizaionForm.Show(this);
+                ImageQuantizaionOpen = true;
+                ImageQuantizaionForm.FormClosed += ImageQuantizaionForm_FormClosed; 
+                
+            }
 
         }
 
-
+        private void ImageQuantizaionForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            ImageQuantizaionOpen = false;
+          
+        }
     }
 }
