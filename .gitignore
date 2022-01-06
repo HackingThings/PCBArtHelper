@@ -8,3 +8,4 @@ obj/Debug/.NETFramework,Version=v4.7.2.AssemblyAttributes.cs
 *.config
 *.txt
 .vs/PCBArtHelper/v16/.suo
+obj/Debug/TempPE/Properties.Resources.Designer.cs.dll

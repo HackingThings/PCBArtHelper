@@ -12,7 +12,8 @@ using System.Windows.Forms;
 
 namespace PCBArtHelper
 {
-    //Source for image quantization code is https://www.codeproject.com/articles/66341/a-simple-yet-quite-powerful-palette-quantizer-in-c
+    //Source for image quantization code can be found at https://www.codeproject.com/articles/66341/a-simple-yet-quite-powerful-palette-quantizer-in-c
+    //I used the oldest example to simplify things, for more complex image editing i recommend using an actual Image editing tool and not this hacked together piece of software.
     public partial class ImageQuantization : Form
     {
         private IColorQuantizer quantizer;
@@ -68,7 +69,8 @@ namespace PCBArtHelper
                 throw;
             }
 
-            // calculates the palette
+            // calculates the palette 
+            // for some weird reason i can't set my own pallete size so i have to use ready made bitmaps i created with Paint.net
             Bitmap result2;
             switch (pallete)
             {
