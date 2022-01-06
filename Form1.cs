@@ -39,6 +39,7 @@ namespace ImageEditor
 
         private void Opf_FileOk(object sender, CancelEventArgs e)
         {
+            checkedListBox1.Items.Clear();
             bmp = new Bitmap(opf.FileName);
             if (bmp.Palette.Entries.Length == 0)
             {

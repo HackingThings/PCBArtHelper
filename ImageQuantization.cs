@@ -21,7 +21,7 @@ namespace PCBArtHelper
         public ImageQuantization()
         {
             InitializeComponent();
-            comboBox1.SelectedIndex = 2;
+            comboBox1.SelectedIndex = 3;
             quantizer = new PaletteQuantizer();
         }
 
@@ -145,7 +145,7 @@ namespace PCBArtHelper
         private void btnOpenFile_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.tif;...";
+            ofd.Filter = "Image Files|*.jpg; *.bmp; *.jpeg;*.png;*.gif;*.tif;...";
             ofd.ShowDialog();
             pictureBox1.Image = new Bitmap(ofd.FileName);
             this.img = pictureBox1.Image;
@@ -155,13 +155,21 @@ namespace PCBArtHelper
         private void btnSave_Click(object sender, EventArgs e)
         {
             SaveFileDialog sfd = new SaveFileDialog();
-            sfd.ShowDialog();
+            sfd.Filter = "Bitmap Image Files(*.bmp)| *.bmp; | All files(*.*) | *.*;";
+            this.img = pictureBox1.Image;
             sfd.FileOk += Sfd_FileOk;
+            sfd.ShowDialog();
+            
         }
 
         private void Sfd_FileOk(object sender, CancelEventArgs e)
         {
             this.img.Save(((SaveFileDialog)sender).FileName);
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
