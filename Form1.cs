@@ -80,9 +80,6 @@ namespace ImageEditor
                 }
             }
         }
-
-
-
         private void btnBlack_Click(object sender, EventArgs e)
         {
             bmp = Originalbmp;
@@ -131,7 +128,6 @@ namespace ImageEditor
                 {
                     colorMap[i].NewColor = newColor;
                 }
-
             }
 
             ImageAttributes attr = new ImageAttributes();
@@ -140,17 +136,12 @@ namespace ImageEditor
             Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
             g.DrawImage(newBmp, rect, 0, 0, rect.Width, rect.Height, GraphicsUnit.Pixel, attr);
             pictureBox1.Image = newBmp;
-
-
-
-
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             sf.FileOk += Sf_FileOk;
             sf.ShowDialog();
-
         }
 
         private void Sf_FileOk(object sender, CancelEventArgs e)
